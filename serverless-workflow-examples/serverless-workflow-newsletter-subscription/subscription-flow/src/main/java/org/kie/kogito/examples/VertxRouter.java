@@ -13,23 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.acme.travel;
 
-import java.io.IOException;
+package org.kie.kogito.examples;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import javax.enterprise.event.Observes;
 
-import org.kie.kogito.event.EventUnmarshaller;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.web.Router;
 
 @ApplicationScoped
-public class AvroEventUnmarshaller implements EventUnmarshaller<byte[]> {
+public class VertxRouter {
 
-    @Inject
-    AvroUtils avroUtils;
-
-    @Override
-    public <T> T unmarshall(byte[] input, Class<T> outputClass, Class<?>... parametrizedClasses) throws IOException {
-        return avroUtils.readObject(input, outputClass, parametrizedClasses);
+    public void setupRouter(@Observes Router router) {
+        // send get requests on the root path o the index.html too.
+        router.route(HttpMethod.GET, "/").order(Integer.MIN_VALUE).handler(ctx -> ctx.reroute("/index.html"));
     }
 }
