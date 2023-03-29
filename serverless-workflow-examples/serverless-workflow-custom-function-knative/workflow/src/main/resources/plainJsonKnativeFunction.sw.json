@@ -23,6 +23,7 @@
           "functionRef": {
             "refName": "greet",
             "arguments": {
+              "id": ".ceid",
               "name": ".name"
             }
           }

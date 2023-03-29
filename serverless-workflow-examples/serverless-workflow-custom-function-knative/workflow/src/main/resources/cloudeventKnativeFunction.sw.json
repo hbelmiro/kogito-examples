@@ -23,7 +23,12 @@
         {
           "functionRef": {
             "refName": "greet",
-            "arguments": ".cloudevent"
+            "arguments": {
+              "specversion": "1.0",
+              "source": "org.acme.source",
+              "type": "test",
+              "id": "${ .ceid .ceid }"
+            }
           }
         }
       ],
